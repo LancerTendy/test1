@@ -4,18 +4,14 @@ package tasks;
 public class Task {
     private int id;
     private String name;
-    private Integer epicId; // Для подзадач, если есть
+    private String description; // Описание задачи
+    private TaskStatus status; // Статус задачи
 
-    public Task(int id, String name) {
+    public Task(int id, String name, String description, TaskStatus status) {
         this.id = id;
         this.name = name;
-        this.epicId = null; // По умолчанию подзадача не привязана к эпикам
-    }
-
-    public Task(int id, String name, int epicId) {
-        this.id = id;
-        this.name = name;
-        this.epicId = epicId; // Подзадача привязана к эпикам
+        this.description = description;
+        this.status = status;
     }
 
     public int getId() {
@@ -26,7 +22,29 @@ public class Task {
         return name;
     }
 
-    public Integer getEpicId() {
-        return epicId;
+    public String getDescription() {
+        return description;
     }
+
+    public TaskStatus getStatus() {
+        return status;
+    }
+
+    // Сеттеры
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public void setStatus(TaskStatus status) {
+        this.status = status;
+    }
+}
+
+// Enum для статуса задачи
+enum TaskStatus {
+    NEW, IN_PROGRESS, COMPLETED, BLOCKED
 }
