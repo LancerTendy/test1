@@ -1,32 +1,16 @@
-package tasks;
+public class Main {
+    public static void main(String[] args) {
+        Epic epic = new Epic(1, "Epic Task");
+        Subtask subtask1 = new Subtask(101, "Subtask 1", epic.getId());
+        Subtask subtask2 = new Subtask(102, "Subtask 2", epic.getId());
 
-// tasks.Task.java
-public class Task {
-    private int id;
-    private String name;
-    private Integer epicId; // Для подзадач, если есть
+        epic.addSubtask(subtask1.getId());
+        epic.addSubtask(subtask2.getId());
 
-    public Task(int id, String name) {
-        this.id = id;
-        this.name = name;
-        this.epicId = null; // По умолчанию подзадача не привязана к эпикам
-    }
+        System.out.println("Epic: " + epic.getName());
+        System.out.println("Subtask IDs: " + epic.getSubtaskIds());
 
-    public Task(int id, String name, int epicId) {
-        this.id = id;
-        this.name = name;
-        this.epicId = epicId; // Подзадача привязана к эпикам
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public Integer getEpicId() {
-        return epicId;
+        epic.removeSubtask(subtask1.getId());
+        System.out.println("Subtask IDs after removal: " + epic.getSubtaskIds());
     }
 }
