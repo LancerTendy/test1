@@ -1,6 +1,7 @@
 package Main;
 
-import manager.InMemoryHistoryManager;
+import manager.Managers;
+import manager.HistoryManager;
 import tasks.Epic;
 import tasks.Task;
 
@@ -8,7 +9,7 @@ import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
-        InMemoryHistoryManager historyManager = new InMemoryHistoryManager();
+        HistoryManager historyManager = Managers.getDefaultHistoryManager();
 
         // Создание задач
         Task task1 = new Task(1, "Задача 1");
@@ -50,7 +51,7 @@ public class Main {
         printHistory(historyManager); // Эпик и его подзадачи не должны отображаться
     }
 
-    private static void printHistory(InMemoryHistoryManager historyManager) {
+    private static void printHistory(HistoryManager historyManager) {
         List<Task> history = historyManager.getHistory();
         System.out.println("История просмотров:");
         for (Task task : history) {
