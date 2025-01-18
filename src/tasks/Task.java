@@ -1,16 +1,29 @@
-public class Main {
-    public static void main(String[] args) {
-        Epic epic = new Epic(1, "Epic Task");
-        Subtask subtask1 = new Subtask(101, "Subtask 1", epic.getId());
-        Subtask subtask2 = new Subtask(102, "Subtask 2", epic.getId());
+package tasks;
 
-        epic.addSubtask(subtask1.getId());
-        epic.addSubtask(subtask2.getId());
+public class Task {
+    private int id;
+    private String name;
+    private Status status; // Статус задачи
 
-        System.out.println("Epic: " + epic.getName());
-        System.out.println("Subtask IDs: " + epic.getSubtaskIds());
+    public Task(int id, String name) {
+        this.id = id;
+        this.name = name;
+        this.status = Status.NEW; // По умолчанию статус новой задачи
+    }
 
-        epic.removeSubtask(subtask1.getId());
-        System.out.println("Subtask IDs after removal: " + epic.getSubtaskIds());
+    public int getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public Status getStatus() {
+        return status;
+    }
+
+    public void setStatus(Status status) {
+        this.status = status;
     }
 }
