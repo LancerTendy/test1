@@ -1,6 +1,7 @@
 package manager;
 
 import tasks.Task;
+import tasks.Node; // Импортируем класс Node
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -11,17 +12,6 @@ public class InMemoryHistoryManager implements HistoryManager {
     private Node head; // Указатель на первый узел
     private Node tail; // Указатель на последний узел
     private final Set<Integer> taskIds = new HashSet<>(); // Для уникальности ID задач
-
-    // Внутренний класс для узла списка
-    private static class Node {
-        Task task; // Ссылка на задачу
-        Node prev; // Ссылка на предыдущий узел
-        Node next; // Ссылка на следующий узел
-
-        Node(Task task) {
-            this.task = task;
-        }
-    }
 
     @Override
     public void add(Task task) {
