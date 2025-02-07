@@ -18,23 +18,6 @@ public class InMemoryHistoryManager implements HistoryManager {
         this.tail = null;
     }
 
-    // Внутренний класс Node (не вложенный)
-    private static class Node {
-        private final Task task; // Соблюдаем принцип инкапсуляции
-        private Node prev; // Ссылка на предыдущий узел
-        private Node next; // Ссылка на следующий узел
-
-        Node(Task task) {
-            this.task = task;
-            this.prev = null;
-            this.next = null;
-        }
-
-        public Task getTask() {
-            return task;
-        }
-    }
-
     // Метод для добавления задачи в конец списка
     private void linkLast(Task task) {
         Node newNode = new Node(task);
@@ -42,8 +25,8 @@ public class InMemoryHistoryManager implements HistoryManager {
             head = newNode;
             tail = newNode;
         } else {
-            tail.next = newNode;
-            newNode.prev = tail;
+            tail.setNext(newNode);
+            newNode.setPrev(tail);
             tail = newNode;
         }
     }
@@ -54,7 +37,7 @@ public class InMemoryHistoryManager implements HistoryManager {
         Node current = head;
         while (current != null) {
             tasks.add(current.getTask());
-            current = current.next;
+            current = current.getNext();
         }
         return tasks;
     }
@@ -66,16 +49,16 @@ public class InMemoryHistoryManager implements HistoryManager {
         }
 
         // Обновляем ссылки соседних узлов
-        if (node.prev != null) {
-            node.prev.next = node.next;
+        if (node.getPrev() != null) {
+            node.getPrev().setNext(node.getNext());
         } else {
-            head = node.next; // Если удаляемый узел — голова
+            head = node.getNext(); // Если удаляемый узел — голова
         }
 
-        if (node.next != null) {
-            node.next.prev = node.prev;
+        if (node.getNext() != null) {
+            node.getNext().setPrev(node.getPrev());
         } else {
-            tail = node.prev; // Если удаляемый узел — хвост
+            tail = node.getPrev(); // Если удаляемый узел — хвост
         }
     }
 
