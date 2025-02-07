@@ -1,11 +1,3 @@
-import static org.junit.jupiter.api.Assertions.*;
-
-import model.Task;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-import service.HistoryManager;
-import service.InMemoryHistoryManager;
-
 import java.util.List;
 
 
@@ -19,6 +11,11 @@ class InMemoryHistoryManagerTest {
     @Test
     public void testGetHistory() {
         Task task = new Task("Model.Task", "NEW");
+@TarasovSam TarasovSam last week
+Создание всех объектов рекомендую перенести в блок @beforeeach
+Так гарантируется, что каждый тест будет начинаться с чистого листа. И плюс отделишь логику тестов от "макаронного" кода
+
+@LancerTendy	Reply...
         historyManager.add(task);
         List<Task> history = historyManager.getHistory();
         assertTrue(historyManager.getHistory().contains(task), "The original history list was modified.");
